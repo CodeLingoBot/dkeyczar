@@ -297,7 +297,7 @@ func (kc *keySignedEncypter) Encrypt(plaintext []uint8) (string, error) {
 	return attachedMessage, nil
 }
 
-// Decode and decrypt ciphertext and return plaintext as []byte
+// Decrypt decodes and decrypt ciphertext and return plaintext as []byte
 // All the heavy lifting is done by the key
 func (kc *keyCrypter) Decrypt(ciphertext string) ([]uint8, error) {
 
@@ -318,7 +318,7 @@ func (kc *keyCrypter) Decrypt(ciphertext string) ([]uint8, error) {
 	return nil, ErrInvalidSignature
 }
 
-// Decode and decrypt ciphertext and return plaintext as []byte
+// Decrypt decodes and decrypt ciphertext and return plaintext as []byte
 // All the heavy lifting is done by the key
 func (kc *keySignedDecrypter) Decrypt(signedCiphertext string) ([]uint8, error) {
 
@@ -417,7 +417,7 @@ func (ks *keySigner) Verify(msg []byte, signature string) (bool, error) {
 	return false, nil
 }
 
-// Return a signature for 'msg'
+// Sign returns a signature for 'msg'
 // All the heavy lifting is done by the key
 func (ks *keySigner) Sign(msg []byte) (string, error) {
 
@@ -511,7 +511,7 @@ func (ks *keySigner) AttachedVerify(signedMsg string, nonce []byte) ([]byte, err
 	return nil, ErrInvalidSignature
 }
 
-// Return a signature for 'msg' and the nonce
+// AttachedSign returns a signature for 'msg' and the nonce
 // All the heavy lifting is done by the key
 func (ks *keySigner) AttachedSign(msg []byte, nonce []byte) (string, error) {
 
@@ -597,7 +597,7 @@ func (ks *keySigner) TimeoutSign(msg []byte, expiration int64) (string, error) {
 	return s, nil
 }
 
-// validate a timeout signature.  must be both cryptographically valid and not yet expired.
+// TimeoutVerify validates a timeout signature.  must be both cryptographically valid and not yet expired.
 func (ks *keySigner) TimeoutVerify(message []byte, signature string) (bool, error) {
 
 	sig, kl, err := splitHeader(ks.encodingController, ks.kz, signature, ErrShortSignature)

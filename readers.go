@@ -75,7 +75,7 @@ func NewEncryptedReader(reader KeyReader, crypter Crypter) KeyReader {
 	return r
 }
 
-// return the meta information from the wrapper reader.  Meta information is not encrypted.
+// GetMetadata returns the meta information from the wrapper reader.  Meta information is not encrypted.
 func (r *encryptedReader) GetMetadata() (string, error) {
 	return r.reader.GetMetadata()
 }
